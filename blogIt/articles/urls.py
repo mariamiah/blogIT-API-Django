@@ -5,8 +5,9 @@ from .views import (
 )
 from .models import Article
 
+app_name = 'articles'
 
 urlpatterns = [
     path('', ArticleList.as_view()),
-    path('<int:pk>/', ArticleDetail.as_view()),
+    path('<slug>/', ArticleDetail.as_view(), name="articles-detail"),
 ]
