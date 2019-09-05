@@ -6,3 +6,6 @@ __pycache__/
 blogIt/blogIt/__pycache__/**
 **/**/__pycache__/
 **/__pycache__
+blogIt/articles/migrations/*
+blogIt/*/migrations/*
+blogIt/articles/migrations

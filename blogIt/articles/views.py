@@ -12,11 +12,17 @@ class ArticleList(APIView):
     """
     def get(self, request, format=None):
         articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
+        serializer_context = {
+            'request': request
+        }
+        serializer = ArticleSerializer(articles, many=True, context=serializer_context)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = ArticleSerializer(data=request.data)
+        serializer_context = {
+            'request': request
+        }
+        serializer = ArticleSerializer(data=request.data, context=serializer_context)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -27,26 +33,32 @@ class ArticleDetail(APIView):
     """
     Retrieve, Update and Delete an article instance
     """
-    def get_object(self, pk):
+    def get_object(self, slug):
         try:
-            return Article.objects.get(pk=pk)
+            return Article.objects.get(slug=slug)
         except Article.DoesNotExist:
             raise Http404
     
-    def get(self, request, pk, format=None):
-        article = self.get_object(pk)
-        serializer = ArticleSerializer(article)
+    def get(self, request, slug, format=None):
+        article = self.get_object(slug)
+        serializer_context = {
+            'request': request
+        }
+        serializer = ArticleSerializer(article, context=serializer_context)
         return Response(serializer.data)
     
-    def put(self, request, pk, format=None):
-        article = self.get_object(pk)
-        serializer = ArticleSerializer(article, data=request.data)
+    def put(self, request, slug, format=None):
+        article = self.get_object(slug)
+        serializer_context = {
+            'request': request
+        }
+        serializer = ArticleSerializer(article, data=request.data, context=serializer_context)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk, format=None):
-        article = self.get_object(pk)
+    def delete(self, request, slug, format=None):
+        article = self.get_object(slug)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
