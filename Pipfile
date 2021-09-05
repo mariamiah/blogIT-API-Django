@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+django-environ = "*"
+psycopg2-binary = "*"
+sentry-sdk = "*"
+jsbeautifier = "*"
+django-webpack-loader = "*"
+celery = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-django = "*"
+flake8 = "*"
+isort = "*"
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+server = "python manage.py runserver"
+migrate="python manage.py migrate"

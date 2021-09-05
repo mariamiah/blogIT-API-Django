@@ -1,11 +1,20 @@
 .vscode/
-.env
-venv/
-__pycache__/
+# Python bytecode
+__pycache__
 **/__pycache__
-blogIt/blogIt/__pycache__/**
 **/**/__pycache__/
 **/__pycache__
-blogIt/articles/migrations/*
-blogIt/*/migrations/*
-blogIt/articles/migrations
+# Django dynamic directories
+logs
+media
+# Environment variables
+.env
+.env.*
+# Static files
+node_modules
+# Webpack
+assets/webpack-bundle.dev.json
+assets/bundles/style-dev-main.css
+assets/bundles/style-dev-main.css.map
+assets/bundles/script-dev-main.js
+assets/bundles/script-dev-main.js.map
